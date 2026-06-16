@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SquadGoals - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bbcbb8",
+                        "on-tertiary-container": "#3f4142",
+                        "on-surface-variant": "#3c4a3c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "on-primary-container": "#004c1b",
+                        "surface-container-high": "#e9e8e7",
+                        "tertiary": "#5d5f5f",
+                        "surface-container": "#efeded",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#00c853",
+                        "surface-tint": "#006e2a",
+                        "outline": "#6c7b6a",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#fbf9f8",
+                        "inverse-surface": "#303031",
+                        "secondary-fixed": "#e5e2e1",
+                        "secondary-container": "#e5e2e1",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed-variant": "#474646",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed": "#002108",
+                        "background": "#fbf9f8",
+                        "on-primary-fixed-variant": "#00531e",
+                        "inverse-primary": "#3ce36a",
+                        "on-surface": "#1b1c1c",
+                        "on-background": "#1b1c1c",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-dim": "#dbdad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#acadad",
+                        "primary-fixed-dim": "#3ce36a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface": "#fbf9f8",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-container": "#656464",
+                        "primary": "#006e2a",
+                        "primary-fixed": "#69ff87",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-bold": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="w-full bg-surface z-50 sticky top-0 border-b-2 border-on-surface">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<a class="font-display-lg text-headline-lg-mobile md:text-display-lg font-extrabold text-on-surface tracking-tighter" href="#">SquadGoals</a>
+<nav class="hidden md:flex gap-4 ml-8 h-full items-end">
+<a class="font-label-bold text-label-bold text-primary border-b-4 border-primary pb-2 scale-95 duration-100 ease-in-out" href="#">Home</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors pb-[10px]" href="#">Soccer 5</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors pb-[10px]" href="#">Hangouts</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors pb-[10px]" href="#">Birthdays</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center justify-center bg-on-surface text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-full hover:bg-primary transition-colors duration-200">
+                    Create Event
+                </button>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-16">
+<!-- Hero Section -->
+<section class="mb-16 md:mb-24">
+<div class="bg-on-surface rounded-[32px] overflow-hidden relative min-h-[400px] flex items-center">
+<!-- Background Image -->
+<div class="absolute inset-0 w-full h-full">
+<img alt="A diverse group of energetic young adults laughing and celebrating together outdoors. The lighting is bright and sunny, creating a high-energy, vibrant atmosphere. They are casual and sporty, reflecting a modern, active lifestyle perfect for a social squad app. The scene is full of kinetic motion and genuine friendship." class="w-full h-full object-cover opacity-60" data-alt="A diverse group of energetic young adults laughing and celebrating together outdoors. The lighting is bright and sunny, creating a high-energy, vibrant atmosphere. They are casual and sporty, reflecting a modern, active lifestyle perfect for a social squad app. The scene is full of kinetic motion and genuine friendship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASIwomr_bOiOlvfoJxtnQMlj6I2MPasBQNeAEgS6rTzHXZLZYKa53aA9NXnQnAhAmt1lJq93zp-5uyGU7XQ45tHTazRxxhKMKpvxuU7wiCN9WNCzRlCQDjNj8VNf2F-Oaoqxyx-6XJCQ5wuzCqJktezNayawQk7_DaZDoq5epbwvXt03srKZ8MxBV8qKQcAr0c_-JXjuHAC86LGYP1eMC_uIfWwXg1ZcUb17G4kkJ7E1xfXC6wk-T_bVnceLKvmc0zYfJMRqm2gbo"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface via-on-surface/80 to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 md:p-16 max-w-2xl text-on-primary">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg mb-6 leading-tight">Welcome back,<br/><span class="text-primary-fixed">The Weekend Warriors</span></h1>
+<p class="font-body-lg text-body-lg mb-8 opacity-90 max-w-lg">Your squad is active! You have 3 events coming up this week. Don't forget to lock in your RSVP for the Friday match.</p>
+<button class="bg-primary-fixed text-on-primary-fixed font-label-bold text-label-bold px-8 py-4 rounded-full hover:scale-105 transition-transform duration-200">
+                        View Full Calendar
+                    </button>
+</div>
+</div>
+</section>
+<!-- Dashboard Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+<!-- Next Match (Soccer) -->
+<div class="col-span-1 md:col-span-8 bg-[#F4F4F4] rounded-[24px] p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110 duration-500"></div>
+<div class="flex justify-between items-start mb-12 relative z-10">
+<div>
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-label-bold text-label-bold px-3 py-1.5 rounded-full mb-4">
+<span class="material-symbols-outlined text-[18px]">sports_soccer</span>
+                            Soccer 5
+                        </div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Friday Night Lights<br/>Derby Match</h2>
+</div>
+<div class="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+</div>
+<div class="flex flex-col md:flex-row gap-6 justify-between items-end relative z-10">
+<div class="flex gap-4">
+<div class="bg-surface rounded-xl p-4 min-w-[100px] border border-outline-variant/30">
+<p class="font-label-bold text-label-bold text-on-surface-variant mb-1">DATE</p>
+<p class="font-title-md text-title-md text-on-surface">Oct 24</p>
+</div>
+<div class="bg-surface rounded-xl p-4 min-w-[100px] border border-outline-variant/30">
+<p class="font-label-bold text-label-bold text-on-surface-variant mb-1">TIME</p>
+<p class="font-title-md text-title-md text-on-surface">19:00</p>
+</div>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full bg-tertiary border-2 border-[#F4F4F4] flex items-center justify-center text-on-primary font-label-bold text-[12px]">JD</div>
+<div class="w-10 h-10 rounded-full bg-secondary border-2 border-[#F4F4F4] flex items-center justify-center text-on-primary font-label-bold text-[12px]">MK</div>
+<div class="w-10 h-10 rounded-full bg-primary border-2 border-[#F4F4F4] flex items-center justify-center text-on-primary font-label-bold text-[12px]">+8</div>
+</div>
+<button class="flex-grow md:flex-grow-0 bg-on-surface text-on-primary font-label-bold text-label-bold px-6 py-3 rounded-full hover:bg-primary transition-colors duration-200">
+                            RSVP Now
+                        </button>
+</div>
+</div>
+</div>
+<!-- Side Column -->
+<div class="col-span-1 md:col-span-4 flex flex-col gap-gutter">
+<!-- Upcoming Hangout -->
+<div class="bg-[#F4F4F4] rounded-[24px] p-6 flex-grow border-t-4 border-primary">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-label-bold text-label-bold px-3 py-1.5 rounded-full mb-4">
+<span class="material-symbols-outlined text-[18px]">local_cafe</span>
+                        Hangouts
+                    </div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Post-Match Beers &amp; Burgers</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Downtown Taphouse. First round is on the loser team!</p>
+<div class="flex items-center gap-3 text-on-surface-variant font-label-bold text-label-bold">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+                        Friday, 21:30
+                    </div>
+</div>
+<!-- Next Birthday -->
+<div class="bg-on-surface rounded-[24px] p-6 text-on-primary relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">cake</span>
+</div>
+<h3 class="font-title-md text-title-md mb-6 relative z-10">Next Birthday</h3>
+<div class="flex items-center gap-4 relative z-10">
+<div class="w-16 h-16 rounded-full border-2 border-primary-fixed p-1">
+<img alt="A smiling young woman with bright eyes and clear skin, looking directly at the camera. The background is a soft, blurred light setting to emphasize her expression. Her appearance aligns with a modern, friendly social app user profile picture." class="w-full h-full rounded-full object-cover" data-alt="A smiling young woman with bright eyes and clear skin, looking directly at the camera. The background is a soft, blurred light setting to emphasize her expression. Her appearance aligns with a modern, friendly social app user profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuIBcO3xrPiBt1gCZhF_CCqh1A36RUNQCkG7fsxmrAsveMqXSXhPTfUHozGuKEAfHo4ojk5SyRSiIbnSGUwvFkc1pz9l5lmfGbyyNiM00DaH8DtalIGrbWNjjorlQMu_eJZzY8m8MMNlcMhWUfNeuM5hblpgSr6OiRVYox7bGadeWaWhyeCDxxoT1vdMRJj-uqeetf5gr8u3kTOnfeGHs71ef_zXW45hXoAudOP73vG7BjrUN9GVzqKdRp8Qavnst6f7wvDQKAQ6c"/>
+</div>
+<div>
+<p class="font-title-md text-title-md">Sarah Jenkins</p>
+<p class="font-body-md text-body-md text-primary-fixed">Turning 28 tomorrow!</p>
+</div>
+</div>
+<button class="w-full mt-6 bg-transparent border-2 border-primary-fixed text-primary-fixed font-label-bold text-label-bold py-2 rounded-full hover:bg-primary-fixed hover:text-on-surface transition-colors duration-200 relative z-10">
+                        Send a Gift
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-on-surface py-12 mt-16">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto gap-8">
+<div class="font-title-md text-title-md text-primary-fixed">SquadGoals</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">Privacy</a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">Terms</a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">Support</a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">Guidelines</a>
+</div>
+<div class="font-body-md text-body-md text-surface-variant opacity-60">
+                © 2024 SquadGoals Social. Kinetic Friendships.
+            </div>
+</div>
+</footer>
+</body></html>

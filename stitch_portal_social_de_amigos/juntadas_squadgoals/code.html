@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SquadGoals - Hangouts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bbcbb8",
+                        "on-tertiary-container": "#3f4142",
+                        "on-surface-variant": "#3c4a3c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "on-primary-container": "#004c1b",
+                        "surface-container-high": "#e9e8e7",
+                        "tertiary": "#5d5f5f",
+                        "surface-container": "#efeded",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#00c853",
+                        "surface-tint": "#006e2a",
+                        "outline": "#6c7b6a",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-bright": "#fbf9f8",
+                        "inverse-surface": "#303031",
+                        "secondary-fixed": "#e5e2e1",
+                        "secondary-container": "#e5e2e1",
+                        "surface-variant": "#e4e2e2",
+                        "on-secondary-fixed-variant": "#474646",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed": "#002108",
+                        "background": "#fbf9f8",
+                        "on-primary-fixed-variant": "#00531e",
+                        "inverse-primary": "#3ce36a",
+                        "on-surface": "#1b1c1c",
+                        "on-background": "#1b1c1c",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface-dim": "#dbdad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#acadad",
+                        "primary-fixed-dim": "#3ce36a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface": "#fbf9f8",
+                        "secondary-fixed-dim": "#c9c6c5",
+                        "secondary": "#5f5e5e",
+                        "on-secondary-container": "#656464",
+                        "primary": "#006e2a",
+                        "primary-fixed": "#69ff87",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-bold": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary selection:text-on-primary flex flex-col min-h-screen">
+<!-- TopNavBar Shared Component -->
+<header class="bg-surface border-b-2 border-on-surface sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop h-20 max-w-container-max mx-auto">
+<!-- Brand -->
+<div class="font-display-lg text-display-lg font-extrabold text-on-surface tracking-tighter">
+                SquadGoals
+            </div>
+<!-- Navigation Links (Web) -->
+<nav class="hidden md:flex gap-8 items-center h-full">
+<!-- Inactive -->
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold text-label-bold flex flex-col justify-center h-full pt-2" href="#">
+                    Home
+                </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold text-label-bold flex flex-col justify-center h-full pt-2" href="#">
+                    Soccer 5
+                </a>
+<!-- Active -->
+<a class="text-primary border-b-4 border-primary pb-2 font-label-bold text-label-bold flex flex-col justify-center h-full pt-[10px]" href="#">
+                    Hangouts
+                </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-bold text-label-bold flex flex-col justify-center h-full pt-2" href="#">
+                    Birthdays
+                </a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden md:flex bg-on-surface text-on-primary px-6 py-3 rounded-lg font-label-bold text-label-bold hover:bg-primary transition-colors active:scale-95 duration-100 ease-in-out">
+                    Create Event
+                </button>
+<button class="text-on-surface hover:text-primary transition-colors hover:bg-surface-container rounded-full p-2">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+<button class="text-on-surface hover:text-primary transition-colors hover:bg-surface-container rounded-full p-2">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+</button>
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col gap-16">
+<!-- Hero Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">Upcoming Hangouts</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Plan dinners, coordinate pre-games, and vote on where the squad is heading next.</p>
+</div>
+<button class="md:hidden w-full bg-on-surface text-on-primary px-6 py-4 rounded-lg font-label-bold text-label-bold active:scale-95 transition-transform flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Create Event
+            </button>
+</section>
+<!-- Bento Grid Layout for Hangouts -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Featured Planning Hangout (Span 8) -->
+<article class="md:col-span-8 bg-surface-container-low rounded-xl overflow-hidden border-2 border-transparent hover:border-on-surface transition-colors duration-300 flex flex-col group cursor-pointer relative">
+<!-- Hero Image Area -->
+<div class="h-64 md:h-80 w-full bg-surface-dim relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A lively, high-end gastropub atmosphere viewed at night, filled with a diverse group of young friends laughing and talking over artisan cocktails and gourmet tapas. The scene is illuminated by warm, moody string lights and neon accents that pop against deep, ink-black shadows, embodying a modern, kinetic social energy. Subtle electric green lighting highlights the modern architecture, fitting perfectly into a high-contrast, tech-forward UI aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDuzL51qLFUfGUxuuty-nDPny7DcHwSI2AIEusgi28Da2odUX9C8SvmsE1ahHy9stgqMjR3Dzc91ePXuvlfoKB6sq54BtQ7CcEiehc0SS0JMTWilBO53iGbNyGDOA8I1ByNEkAzJlgK4hO5ifYyfuOI1LbIlJ8ube3KsdDea7hH58mJGBQwkqnAEpzs4MOBamV9-C-SNLNi5TxTkcheVKabxEGFSbRiFLFYE-nNrKuJYmV9JWsTnsMj5Lbmox3YFfe6LNeP5MSjM6Y');">
+</div>
+<!-- Gradient overlay for text legibility -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface via-transparent to-transparent opacity-90"></div>
+<!-- Top Labels -->
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+                            Dinner &amp; Drinks
+                        </span>
+<span class="bg-surface text-on-surface font-label-bold text-label-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] icon-fill text-primary">how_to_vote</span>
+                            Voting Open
+                        </span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="p-6 md:p-8 flex flex-col gap-6 bg-surface-container-low z-10 -mt-16 rounded-t-3xl border-t-2 border-on-surface relative">
+<div class="flex justify-between items-start gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Friday Night Catchup</h2>
+<div class="flex flex-wrap items-center gap-4 font-body-md text-body-md text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                                    This Friday, 8:30 PM
+                                </span>
+<span class="flex items-center gap-1 text-primary font-semibold">
+<span class="material-symbols-outlined text-[20px]">location_on</span>
+                                    Location TBD
+                                </span>
+</div>
+</div>
+<!-- Avatar Pile -->
+<div class="flex -space-x-3 hidden sm:flex">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Close up portrait of a smiling young woman with dark hair in a bright, modern setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC47GZATn338M5sXn_Af-Ldf2JaocyWsSXEoOpOXlqrhmC2pWsMrXc2njQUI5M-jJC6tbnIPpjv2OLkT3kvc7onCGBqWTwaaMupqqtbUCSoQYKjgOHa8E16ISXSRp3lczTCkm18j7NucBYoaGhsHz4pU1BuiVj7-T44BdtNG5LTrrd42hBVLQI-UObdtabUjNbb7jjR8njbdcIR_0uE2ruJUa8mfma9xeeG4_fPZUOmp3JMi4-udtiHRzWTP_1mX-JjiSkx4BzT9JI');"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Close up portrait of a young man with a short beard in a bright, modern setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0q47HaxOUOGk6jInME4KiMVdhquCn8_H0ttxV83h52YTHSUl4k9DpwXXDFWsK3O_JiohmSaHcrY88sAvPuZS_yPCyoc4epBZ-b1g9lABKTgRzyB-_T9uYm53PNuAD_b7F09IKJezQ_eSUO69nTSjzf2Ee1SZNmoV0ttQqHBZLBcZyoHaU3kHKkGJEu5QmZYZWyb2BeLFY9tF981fVD5CLB29Dgg3KYhYMXJRZo05PY2FPvVjgg75aXSnHFyIg2bvKbrcEoKlEokg');"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Close up portrait of a smiling young woman with blonde hair in a bright, modern setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdDRDpkqnjc5WftLQ-LzxZugi4mMu_n7vdbxX7jslql25ltuvYuqtCt_ft_UIUczb4LbGcUSo1QaEMyu3YFVoiahEY59VGeoytgaOSt89GsS0mcg0oiu9t3kjyx8xleQtDW4cgERwnadUiPvRg9lFT2ojnWAGH5hjV6PfZ8OpSOyHt-Qm2tjOjLfFEdHIOzA_03diGpg5vChh203DIAqLZRP16JEAtTUVqSV__BCV6l5TfxQnoN8eN-0yVztw1k5VA4AT8irjeVvo');"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-primary flex items-center justify-center font-label-bold text-label-bold text-on-primary">+4</div>
+</div>
+</div>
+<!-- Interactive Poll Widget -->
+<div class="bg-surface rounded-xl border-2 border-on-surface p-6 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill text-primary">where_to_vote</span>
+                                Where are we eating?
+                            </h3>
+<span class="font-body-md text-body-md text-on-surface-variant">Closes in 4h</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Option 1 -->
+<label class="relative flex items-center justify-between p-4 rounded-lg border-2 border-outline-variant hover:border-primary cursor-pointer transition-all group">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 group-hover:opacity-50 transition-opacity"></div>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Burger Joint Centro</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvNMITd6dcoLY5l9guSPQudz2WeUkf9xZLw0HGxlox8ExTmHdBd147oVt4qqWnAiZV-FWiwxvEdZ89dzNhyuLpc6LDKPlXpq7yLGBt3AdPsc8BykaCSinDul1iBN14u0JTXdeLNIpaZ_QkaGCPnyzR4ZNfl-XNjnNUqbXF4jy487JsLrA12aC4V4MOO-DC2bPERBXrR_j1CDZPs9Q0TDSkeS6l2owWMrFcvCEvNUpPvp8UVG2moCe2z5Ybs8mcddeCo8HvUkcmWlA');"></div>
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCT4DH0eEKSksbKRK72mXkvG35XTWpSh6jMnGdf30MESuUi1fsVb-AUPl7SB4BeHOzubfpi7O4TBJHb3G6zCQ_bLpV1uNzp-nkuYiZU15nBAeNXzlCJC_AimyQNG_jiFmwBC5G9fsefacBTYj_4YbOgCsJCaG1OErc-x6VtcF4jfcR-tPtOb_5gCZvsw3tQg5JzXA7ugRHsh00v-gm5qjkhm3nxaJ9ZLBVVZz6epvpUOgc37I8gE4AqinAXt_8X_RtYzHxXWZgRZOc');"></div>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface-variant">3 votes</span>
+</div>
+</label>
+<!-- Option 2 (Selected state simulation) -->
+<label class="relative flex items-center justify-between p-4 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer transition-all group">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<span class="font-title-md text-title-md text-on-surface">El Camino Tacos</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB93GcK_WGvfXHewU2lgdGQrfPNOLMDusdkPlM5f9MpQKnBaSh0jzD9PkbABcfrBb_AIjurVa4nAoMRPC-_m1nQ97syhevIfjxLm7OdvVUsp_4Kqrt4GJa4RcQuJ1X-vW9FTehQw9HtkZKgG0g8eTgjjKE9IOBMD055OWXi5y-GkwGxRgrns-S4KnQkg1ZXiBYKyN1pro0igZsLQIQfVHv28SuwOzttp4hSiSU-tZjfU81hzVR3VD22uw6XOsGUY46aiIbFX-_faY4');"></div>
+</div>
+<span class="font-label-bold text-label-bold text-primary">5 votes</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</article>
+<!-- Secondary Column (Span 4) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Confirmed Hangout Card -->
+<article class="bg-surface rounded-xl border-2 border-on-surface p-6 flex flex-col gap-4 hover:shadow-[4px_4px_0px_0px_rgba(10,10,10,1)] transition-all duration-200 cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="bg-surface-container-highest text-on-surface font-label-bold text-label-bold px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">celebration</span>
+                            Party
+                        </span>
+<!-- Status dot -->
+<div class="w-3 h-3 rounded-full bg-primary-fixed shadow-[0_0_8px_rgba(105,255,135,0.8)]"></div>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Leo's Housewarming</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span> Tomorrow, 10:00 PM
+                        </p>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span> 1240 Palermo Soho
+                        </p>
+</div>
+<div class="mt-2 pt-4 border-t border-outline-variant flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_u-6n5DG19Dw3dciHRlgwVl24dngF4o_ihYbdgibvkYZ6GlNjzS_jMRIrDbGH3QDPFcTLkEdhHryWl87tp3vDwH7bc9uuKFUBiLSZ62iMAuN2zwRH3w8P56HwAEPfi4dXwNGOY1-4ZsbG9RRF5LompIY07dzCHRfYer5i0l27nFctnPs8UvQ5Ox8Cf1yg_OSFWPhVIdnwYLwL-u2mrbIAS2WsJ29XK54A5C9faTGM23YHHbWAo7X2GHfDaUYIBv6z8SdLoEJL_ZE');"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-dim overflow-hidden bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCI6WMyUtfeD6zlb__9NS1bMmHN4VHx5ecy7SLqmrv3iIjIIXRBh7FKJB0832tX8M3rMIOUddNtjOSMADVrBlGtaH4F_Vl191CJmmlahTxjkWhsNOiyvAWUkeLiDiUDmdeyNdGwFxrjNicfMAhsFx8EMCce1T36JrbFkYCYSWPbLIYbnoAlDUmeqs_N3HJFWQrxz62vzppSjWUslRbx1Q-48Nysb6X1qoG6pnd8K4ZrGCd9oPwkc9-V1K-KOBLIsGohmEtLrE7E1Y0');"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-dim flex items-center justify-center font-label-bold text-label-bold text-on-surface-variant text-[10px]">+12</div>
+</div>
+<button class="font-label-bold text-label-bold text-primary hover:underline">View Details</button>
+</div>
+</article>
+<!-- Quick Discussion / Comments Snippet -->
+<article class="bg-surface-container-low rounded-xl p-6 flex flex-col gap-4 flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined">forum</span>
+                        Recent Chatter
+                    </h3>
+<div class="flex flex-col gap-4 overflow-y-auto max-h-[200px] pr-2 hide-scrollbar">
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full shrink-0 bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8IuGe1O6PN962SISthOpSDvJ993F-2FZbgcisrzL-fe1NrDeLOBGdA79d9OC8Lql7nh5cZIh9XGMXgMPWQ-toyErlW6Mp6qnP7iwGbckt3Qhi-wWXOsGwlAvEtSNLJAsShlwKqaVKvdkWRqjOAWeZvEwq6nd_2tKamSBPHt3hZWCR7KstCcz5yCRkRtDmuICF-UqMzoWYXVh7vSqMXQtePJP2_qjEGKQ5kAbxjZvyLz1t4oXvHnpQM7P4P3hkYM4uu8t6zXgMmFs');"></div>
+<div class="bg-surface rounded-r-xl rounded-bl-xl p-3 border border-outline-variant flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface mb-1">Sofia <span class="text-on-surface-variant font-normal text-[12px] ml-2">10m ago</span></p>
+<p class="font-body-md text-body-md text-on-surface">Can we do somewhere with vegan options this time?</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full shrink-0 bg-cover bg-center" data-alt="Avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqO9fcDfYiQS526_DbDrkT41GEeQWPp-PP0G6oy2a88rbg7my1ZN_OhbavE01qSKZaHDMNRyHeL14-aatmvFDYV71MEEp3D8BqGRAt_SI2Jth4qxl4cbPVxwYla2mWLk38DEdJ-L7L49GK5SqKOCA7Krzn58PnsdGlRWUR2g1hXper3nQB-L3T5AzmWqWy2DVVJgZP2AIsbFqO1kkKsw_EdZKMPEdqXzu-flA2oepPGXZyiJ0jedFH0l3QxwMSi05SY43P0oZ4rd4');"></div>
+<div class="bg-surface rounded-r-xl rounded-bl-xl p-3 border border-outline-variant flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface mb-1">Mateo <span class="text-on-surface-variant font-normal text-[12px] ml-2">5m ago</span></p>
+<p class="font-body-md text-body-md text-on-surface">Tacos usually have good veggie options!</p>
+</div>
+</div>
+</div>
+<div class="mt-auto relative">
+<input class="w-full bg-surface border-2 border-outline-variant rounded-full py-3 pl-4 pr-12 font-body-md text-body-md focus:outline-none focus:border-primary transition-colors" placeholder="Drop a comment..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-on-primary hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Past / Draft Section Header -->
+<section class="mt-8 border-t-2 border-on-surface pt-12">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Planning Stash</h2>
+<button class="font-label-bold text-label-bold text-on-surface hover:text-primary transition-colors flex items-center gap-1">
+                     View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-gutter">
+<!-- Mini Card 1 -->
+<div class="bg-surface rounded-lg p-5 border-2 border-outline-variant hover:border-on-surface transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">local_bar</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface-variant bg-surface-container px-2 py-1 rounded">Draft</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Brewery Tour</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Idea pitched by Alex. Waiting for dates.</p>
+</div>
+<!-- Mini Card 2 -->
+<div class="bg-surface rounded-lg p-5 border-2 border-outline-variant hover:border-on-surface transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">sports_esports</span>
+</div>
+<span class="font-label-bold text-label-bold text-on-surface-variant bg-surface-container px-2 py-1 rounded">Draft</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Game Night</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Mario Kart tournament at Sofia's.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="bg-on-surface flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 max-w-container-max mx-auto mt-16">
+<div class="font-title-md text-title-md text-primary-fixed mb-6 md:mb-0">
+            SquadGoals
+        </div>
+<div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-6 md:mb-0">
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">
+                Privacy
+            </a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">
+                Terms
+            </a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">
+                Support
+            </a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed transition-opacity duration-200" href="#">
+                Guidelines
+            </a>
+</div>
+<div class="font-body-md text-body-md text-surface-variant opacity-60 text-center md:text-right">
+            © 2024 SquadGoals Social. Kinetic Friendships.
+        </div>
+</footer>
+</body></html>

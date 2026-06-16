@@ -1,0 +1,12 @@
+{
+  "name": "squadgoals-portal",
+  "version": "1.0.0",
+  "description": "Portal interactivo para navegar y probar todos los módulos de SquadGoals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "Antigravity",
+  "license": "ISC"
+}

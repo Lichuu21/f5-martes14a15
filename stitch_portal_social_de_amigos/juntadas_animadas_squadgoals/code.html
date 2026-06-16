@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SquadGoals - Juntadas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00c853',
+                        primaryDark: '#009624',
+                        surface: '#ffffff',
+                        background: '#f8fafc',
+                        ink: '#0f172a',
+                        textMuted: '#64748b',
+                        cardBg: '#ffffff',
+                        borderLight: '#e2e8f0',
+                    },
+                    fontFamily: {
+                        sans: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-ink min-h-screen flex flex-col relative overflow-x-hidden">
+    
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-blue-300/20 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
+    </div>
+
+    <!-- Navegación -->
+    <header class="w-full z-50 sticky top-0 bg-white/70 backdrop-blur-xl border-b border-borderLight">
+        <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
+            <div class="flex items-center gap-8">
+                <a class="text-2xl font-extrabold tracking-tight" href="#">SquadGoals</a>
+                <nav class="hidden md:flex gap-6 h-full items-center pt-2">
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Inicio</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Fútbol 5</a>
+                    <a class="text-sm font-bold text-primary border-b-2 border-primary pb-1" href="#">Juntadas</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Cumpleaños</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden md:flex items-center justify-center bg-ink text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary transition-all duration-300 shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5 magnetic-btn">
+                    Crear Evento
+                </button>
+                <div class="flex items-center gap-2">
+                    <button class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted hover:bg-gray-100 hover:text-ink transition-all">
+                        <span class="material-symbols-rounded text-[22px]">notifications</span>
+                    </button>
+                    <button class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted hover:bg-gray-100 hover:text-ink transition-all">
+                        <span class="material-symbols-rounded text-[22px]">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16 flex flex-col gap-16 relative">
+        
+        <!-- Hero Section -->
+        <section class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative reveal-on-scroll">
+            <div class="z-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-4 tracking-tight">Próximas Juntadas</h1>
+                <p class="text-lg text-textMuted max-w-2xl font-light">Planea cenas, coordina previas y vota a dónde va el equipo a continuación.</p>
+            </div>
+        </section>
+
+        <!-- Bento Grid Layout -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Featured Planning Hangout (Span 8) -->
+            <article class="lg:col-span-8 glass-card rounded-[2.5rem] overflow-hidden border border-white hover:border-primary/50 transition-colors duration-300 flex flex-col group cursor-pointer relative reveal-on-scroll shadow-lg">
+                <!-- Hero Image Area -->
+                <div class="h-64 md:h-80 w-full relative overflow-hidden">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDuzL51qLFUfGUxuuty-nDPny7DcHwSI2AIEusgi28Da2odUX9C8SvmsE1ahHy9stgqMjR3Dzc91ePXuvlfoKB6sq54BtQ7CcEiehc0SS0JMTWilBO53iGbNyGDOA8I1ByNEkAzJlgK4hO5ifYyfuOI1LbIlJ8ube3KsdDea7hH58mJGBQwkqnAEpzs4MOBamV9-C-SNLNi5TxTkcheVKabxEGFSbRiFLFYE-nNrKuJYmV9JWsTnsMj5Lbmox3YFfe6LNeP5MSjM6Y');">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-90"></div>
+                    
+                    <!-- Top Labels -->
+                    <div class="absolute top-6 left-6 flex gap-3">
+                        <span class="bg-primary/90 backdrop-blur-md text-ink font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
+                            <span class="material-symbols-rounded text-[16px]">restaurant</span> Cena y Bebidas
+                        </span>
+                        <span class="bg-white/90 backdrop-blur-md text-ink font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
+                            <span class="material-symbols-rounded text-primary text-[16px]">how_to_vote</span> Votación Abierta
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Content Area -->
+                <div class="p-8 md:p-10 flex flex-col gap-8 bg-white z-10 -mt-8 rounded-t-[2.5rem] relative">
+                    <div class="flex justify-between items-start gap-4">
+                        <div>
+                            <h2 class="text-3xl font-extrabold text-ink mb-3 group-hover:text-primary transition-colors">Puesta al Día del Viernes</h2>
+                            <div class="flex flex-wrap items-center gap-6 font-medium text-textMuted">
+                                <span class="flex items-center gap-2">
+                                    <span class="material-symbols-rounded text-[20px] text-primary">calendar_today</span>
+                                    Este Viernes, 20:30
+                                </span>
+                                <span class="flex items-center gap-2 text-ink font-bold">
+                                    <span class="material-symbols-rounded text-[20px] text-primary">location_on</span>
+                                    Ubicación a Definir
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Avatar Pile -->
+                        <div class="flex -space-x-3 hidden sm:flex">
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-gray-200 overflow-hidden bg-cover bg-center z-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC47GZATn338M5sXn_Af-Ldf2JaocyWsSXEoOpOXlqrhmC2pWsMrXc2njQUI5M-jJC6tbnIPpjv2OLkT3kvc7onCGBqWTwaaMupqqtbUCSoQYKjgOHa8E16ISXSRp3lczTCkm18j7NucBYoaGhsHz4pU1BuiVj7-T44BdtNG5LTrrd42hBVLQI-UObdtabUjNbb7jjR8njbdcIR_0uE2ruJUa8mfma9xeeG4_fPZUOmp3JMi4-udtiHRzWTP_1mX-JjiSkx4BzT9JI');"></div>
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-gray-200 overflow-hidden bg-cover bg-center z-20" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0q47HaxOUOGk6jInME4KiMVdhquCn8_H0ttxV83h52YTHSUl4k9DpwXXDFWsK3O_JiohmSaHcrY88sAvPuZS_yPCyoc4epBZ-b1g9lABKTgRzyB-_T9uYm53PNuAD_b7F09IKJezQ_eSUO69nTSjzf2Ee1SZNmoV0ttQqHBZLBcZyoHaU3kHKkGJEu5QmZYZWyb2BeLFY9tF981fVD5CLB29Dgg3KYhYMXJRZo05PY2FPvVjgg75aXSnHFyIg2bvKbrcEoKlEokg');"></div>
+                            <div class="w-12 h-12 rounded-full border-4 border-white bg-primary flex items-center justify-center font-bold text-sm text-ink z-40">+4</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive Poll Widget -->
+                    <div class="bg-gray-50 rounded-[1.5rem] border border-borderLight p-6 flex flex-col gap-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-lg font-bold text-ink flex items-center gap-2">
+                                <span class="material-symbols-rounded text-primary">where_to_vote</span> ¿Dónde comemos?
+                            </h3>
+                            <span class="text-sm font-bold text-textMuted bg-gray-200 px-3 py-1 rounded-full">Cierra en 4h</span>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <!-- Opción 1 -->
+                            <label class="flex items-center justify-between p-4 rounded-xl border-2 border-borderLight hover:border-primary cursor-pointer transition-all bg-white">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full border-2 border-borderLight flex items-center justify-center"></div>
+                                    <span class="font-bold text-ink">Hamburguesería Centro</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-6 h-6 rounded-full border-2 border-white bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvNMITd6dcoLY5l9guSPQudz2WeUkf9xZLw0HGxlox8ExTmHdBd147oVt4qqWnAiZV-FWiwxvEdZ89dzNhyuLpc6LDKPlXpq7yLGBt3AdPsc8BykaCSinDul1iBN14u0JTXdeLNIpaZ_QkaGCPnyzR4ZNfl-XNjnNUqbXF4jy487JsLrA12aC4V4MOO-DC2bPERBXrR_j1CDZPs9Q0TDSkeS6l2owWMrFcvCEvNUpPvp8UVG2moCe2z5Ybs8mcddeCo8HvUkcmWlA');"></div>
+                                    </div>
+                                    <span class="text-sm font-bold text-textMuted">3 votos</span>
+                                </div>
+                            </label>
+                            <!-- Opción 2 (Seleccionada) -->
+                            <label class="flex items-center justify-between p-4 rounded-xl border-2 border-primary bg-primary/5 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                                    </div>
+                                    <span class="font-bold text-ink">Taquería El Camino</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm font-bold text-primary">5 votos</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Secondary Column (Span 4) -->
+            <div class="lg:col-span-4 flex flex-col gap-8">
+                
+                <!-- Confirmed Hangout Card -->
+                <article class="bg-ink rounded-[2rem] p-8 flex flex-col gap-5 text-white shadow-xl reveal-on-scroll relative overflow-hidden group">
+                    <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-rounded text-[120px]">celebration</span>
+                    </div>
+                    <div class="flex justify-between items-start relative z-10">
+                        <span class="bg-primary/20 text-primary font-bold text-xs uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1">
+                            <span class="material-symbols-rounded text-[16px]">celebration</span> Fiesta
+                        </span>
+                        <div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(0,200,83,0.8)] animate-pulse"></div>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-extrabold mb-3">Inauguración de Casa de Leo</h3>
+                        <p class="text-gray-300 flex items-center gap-2 mb-2 font-medium">
+                            <span class="material-symbols-rounded text-[18px] text-primary">calendar_today</span> Mañana, 22:00
+                        </p>
+                        <p class="text-gray-300 flex items-center gap-2 font-medium">
+                            <span class="material-symbols-rounded text-[18px] text-primary">location_on</span> 1240 Palermo Soho
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-5 border-t border-white/20 flex justify-between items-center relative z-10">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full border-2 border-ink bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_u-6n5DG19Dw3dciHRlgwVl24dngF4o_ihYbdgibvkYZ6GlNjzS_jMRIrDbGH3QDPFcTLkEdhHryWl87tp3vDwH7bc9uuKFUBiLSZ62iMAuN2zwRH3w8P56HwAEPfi4dXwNGOY1-4ZsbG9RRF5LompIY07dzCHRfYer5i0l27nFctnPs8UvQ5Ox8Cf1yg_OSFWPhVIdnwYLwL-u2mrbIAS2WsJ29XK54A5C9faTGM23YHHbWAo7X2GHfDaUYIBv6z8SdLoEJL_ZE');"></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-ink bg-gray-200 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCI6WMyUtfeD6zlb__9NS1bMmHN4VHx5ecy7SLqmrv3iIjIIXRBh7FKJB0832tX8M3rMIOUddNtjOSMADVrBlGtaH4F_Vl191CJmmlahTxjkWhsNOiyvAWUkeLiDiUDmdeyNdGwFxrjNicfMAhsFx8EMCce1T36JrbFkYCYSWPbLIYbnoAlDUmeqs_N3HJFWQrxz62vzppSjWUslRbx1Q-48Nysb6X1qoG6pnd8K4ZrGCd9oPwkc9-V1K-KOBLIsGohmEtLrE7E1Y0');"></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-ink bg-primary flex items-center justify-center font-bold text-[10px] text-ink">+12</div>
+                        </div>
+                        <button class="font-bold text-sm text-primary hover:text-white transition-colors">Ver Detalles</button>
+                    </div>
+                </article>
+                
+                <!-- Quick Discussion -->
+                <article class="glass-card rounded-[2rem] p-8 flex flex-col gap-5 flex-grow reveal-on-scroll">
+                    <h3 class="text-xl font-bold text-ink flex items-center gap-2">
+                        <span class="material-symbols-rounded text-primary">forum</span> Charla Reciente
+                    </h3>
+                    <div class="flex flex-col gap-5 overflow-y-auto max-h-[200px] pr-2 hide-scrollbar">
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 rounded-full shrink-0 bg-cover bg-center border border-borderLight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8IuGe1O6PN962SISthOpSDvJ993F-2FZbgcisrzL-fe1NrDeLOBGdA79d9OC8Lql7nh5cZIh9XGMXgMPWQ-toyErlW6Mp6qnP7iwGbckt3Qhi-wWXOsGwlAvEtSNLJAsShlwKqaVKvdkWRqjOAWeZvEwq6nd_2tKamSBPHt3hZWCR7KstCcz5yCRkRtDmuICF-UqMzoWYXVh7vSqMXQtePJP2_qjEGKQ5kAbxjZvyLz1t4oXvHnpQM7P4P3hkYM4uu8t6zXgMmFs');"></div>
+                            <div class="bg-gray-100 rounded-2xl rounded-tl-none p-4 flex-grow">
+                                <p class="font-bold text-sm text-ink mb-1">Sofia <span class="text-textMuted font-medium text-[11px] ml-2">Hace 10m</span></p>
+                                <p class="text-sm text-ink leading-relaxed">¿Podemos ir a algún lugar con opciones veganas esta vez?</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 rounded-full shrink-0 bg-cover bg-center border border-borderLight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqO9fcDfYiQS526_DbDrkT41GEeQWPp-PP0G6oy2a88rbg7my1ZN_OhbavE01qSKZaHDMNRyHeL14-aatmvFDYV71MEEp3D8BqGRAt_SI2Jth4qxl4cbPVxwYla2mWLk38DEdJ-L7L49GK5SqKOCA7Krzn58PnsdGlRWUR2g1hXper3nQB-L3T5AzmWqWy2DVVJgZP2AIsbFqO1kkKsw_EdZKMPEdqXzu-flA2oepPGXZyiJ0jedFH0l3QxwMSi05SY43P0oZ4rd4');"></div>
+                            <div class="bg-primary/10 rounded-2xl rounded-tl-none p-4 flex-grow">
+                                <p class="font-bold text-sm text-ink mb-1">Mateo <span class="text-textMuted font-medium text-[11px] ml-2">Hace 5m</span></p>
+                                <p class="text-sm text-ink leading-relaxed">¡Los tacos suelen tener buenas opciones vegetarianas!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-auto relative pt-4">
+                        <input class="w-full bg-white border border-borderLight rounded-full py-3.5 pl-5 pr-12 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-sm" placeholder="Deja un comentario..." type="text"/>
+                        <button class="absolute right-2 top-1/2 -translate-y-1/2 translate-y-2 w-9 h-9 bg-ink rounded-full flex items-center justify-center text-white hover:bg-primary transition-colors magnetic-btn">
+                            <span class="material-symbols-rounded text-[18px]">send</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Past / Draft Section Header -->
+        <section class="mt-8 border-t border-borderLight pt-12 reveal-on-scroll">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-extrabold text-ink">Baúl de Ideas</h2>
+                <button class="font-bold text-sm text-ink hover:text-primary transition-colors flex items-center gap-1 group">
+                     Ver Todo <span class="material-symbols-rounded text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <!-- Mini Card 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-borderLight hover:border-primary hover:shadow-lg transition-all cursor-pointer group reveal-on-scroll">
+                    <div class="flex justify-between items-start mb-5">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-ink transition-colors group-hover:scale-110 duration-300">
+                            <span class="material-symbols-rounded">local_bar</span>
+                        </div>
+                        <span class="font-bold text-xs text-textMuted bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider">Borrador</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-ink mb-2 group-hover:text-primary transition-colors">Tour de Cervecerías</h4>
+                    <p class="text-sm text-textMuted">Idea propuesta por Alex. Esperando fechas.</p>
+                </div>
+                <!-- Mini Card 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-borderLight hover:border-primary hover:shadow-lg transition-all cursor-pointer group reveal-on-scroll" style="transition-delay: 100ms;">
+                    <div class="flex justify-between items-start mb-5">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-textMuted group-hover:bg-primary group-hover:text-ink transition-colors group-hover:scale-110 duration-300">
+                            <span class="material-symbols-rounded">sports_esports</span>
+                        </div>
+                        <span class="font-bold text-xs text-textMuted bg-gray-100 px-3 py-1 rounded-full uppercase tracking-wider">Borrador</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-ink mb-2 group-hover:text-primary transition-colors">Noche de Juegos</h4>
+                    <p class="text-sm text-textMuted">Torneo de Mario Kart en lo de Sofía.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-borderLight mt-10 bg-white/50 backdrop-blur-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full px-6 md:px-12 py-10 max-w-7xl mx-auto gap-6">
+            <div class="text-xl font-extrabold text-ink tracking-tight">SquadGoals</div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Privacidad</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Términos</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Soporte</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Guías</a>
+            </div>
+            <div class="text-sm font-medium text-textMuted">
+                © 2024 SquadGoals. Amistades Kinéticas.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

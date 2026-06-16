@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SquadGoals - Fútbol 5</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00c853',
+                        primaryDark: '#009624',
+                        surface: '#ffffff',
+                        background: '#f8fafc',
+                        ink: '#0f172a',
+                        textMuted: '#64748b',
+                        cardBg: '#ffffff',
+                        borderLight: '#e2e8f0',
+                    },
+                    fontFamily: {
+                        sans: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+    </style>
+</head>
+<body class="text-ink min-h-screen flex flex-col relative overflow-x-hidden">
+    
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-blue-300/20 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
+    </div>
+
+    <!-- Navegación -->
+    <header class="w-full z-50 sticky top-0 bg-white/70 backdrop-blur-xl border-b border-borderLight">
+        <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
+            <div class="flex items-center gap-8">
+                <a class="text-2xl font-extrabold tracking-tight" href="#">SquadGoals</a>
+                <nav class="hidden md:flex gap-6 h-full items-center pt-2">
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Inicio</a>
+                    <a class="text-sm font-bold text-primary border-b-2 border-primary pb-1" href="#">Fútbol 5</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Juntadas</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Cumpleaños</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden md:flex items-center justify-center bg-ink text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary transition-all duration-300 shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5 magnetic-btn">
+                    Crear Evento
+                </button>
+                <div class="flex items-center gap-2">
+                    <button class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted hover:bg-gray-100 hover:text-ink transition-all">
+                        <span class="material-symbols-rounded text-[22px]">notifications</span>
+                    </button>
+                    <button class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted hover:bg-gray-100 hover:text-ink transition-all">
+                        <span class="material-symbols-rounded text-[22px]">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16">
+        
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Hero / Detalles del Partido -->
+            <div class="col-span-1 lg:col-span-12 glass-card rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-xl">
+                <div class="md:w-5/12 h-64 md:h-auto bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD585zDDFPLft8kMFPaJAyqX6jRxpjsnjf65UgkTtsjXX16MgIlNG-_ofxb5L0_oDc26PeYmjzB_XcxoBn0aI9_dYAbnyFtzZcuCwMIUlJtRPpyy3lw3TLA_PSAVh2_3gvGE79CHpenxLDTGt91pOx6fratCmMKDj-ZsQDAe6Fv2wD7ToOi1_B4Uc8rUMN-p3GeJlBpPOeaQCJHZPbN2WZ7KqNHJlcJ8lIQ-uYBqW7043kuJsUEBmciUFJUGiggG8nX6Tg3zf8i88U');"></div>
+                <div class="p-8 md:p-12 md:w-7/12 flex flex-col justify-center bg-white">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="bg-primary/10 text-primaryDark px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider">Fútbol 5</span>
+                        <span class="flex items-center gap-1 text-textMuted font-bold text-xs uppercase tracking-wider">
+                            <span class="material-symbols-rounded text-[18px]">public</span> Público
+                        </span>
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-ink mb-4 leading-tight tracking-tight">El Gran Clásico<br/>del Viernes</h1>
+                    <p class="text-lg text-textMuted mb-8 leading-relaxed">El derby semanal. Trae tu mejor nivel, zapatillas de pasto sintético y cero excusas. Los perdedores pagan las bebidas post-partido.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-primary/10 p-3 rounded-full flex items-center justify-center">
+                                <span class="material-symbols-rounded text-primary">calendar_month</span>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-textMuted uppercase tracking-widest mb-1">FECHA Y HORA</div>
+                                <div class="text-lg font-bold text-ink">27 Oct, 20:00</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-primary/10 p-3 rounded-full flex items-center justify-center">
+                                <span class="material-symbols-rounded text-primary">location_on</span>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-textMuted uppercase tracking-widest mb-1">UBICACIÓN</div>
+                                <div class="text-lg font-bold text-ink">Cancha Urban Turf</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Armador de Equipos (Left Column) -->
+            <div class="col-span-1 lg:col-span-8 flex flex-col gap-6 mt-4">
+                <div class="flex items-center justify-between reveal-on-scroll">
+                    <h2 class="text-2xl font-extrabold text-ink">Armador de Equipos</h2>
+                    <button class="text-sm font-bold text-primary hover:text-primaryDark transition-colors flex items-center gap-1 animate-pulse">
+                        <span class="material-symbols-rounded text-[18px]">shuffle</span> Equilibrio Automático
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Team A -->
+                    <div class="bg-ink rounded-[2rem] p-8 flex flex-col relative overflow-hidden group reveal-on-scroll shadow-2xl">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-primary/30 transition-colors"></div>
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3 z-10">
+                            <span class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_#00c853]"></span> Equipo Tinta
+                        </h3>
+                        <div class="flex flex-col gap-4 z-10">
+                            <div class="flex items-center gap-3 p-3 bg-white/10 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/30 transition-colors cursor-grab">
+                                <img alt="Avatar" class="w-10 h-10 rounded-full border border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6KCee3iGdjNUTDIGTHniEoIj1Ut_KWg7-CLGfgZ8GhPytNzf6OgkjYbIwdeqJCJE2vb8MQA6SLD05oGeTemuWSfctFGwAtqEDViGErbPYAQOWofVnNEvv3tSJTbpx_uRE5UwpUeNCUxnCVeug8ir4CGoGQbSXv34BpsMs39-Dn4Z4z6XdGXUO4CbDryHATmHaG0KOxQQ7OXsIe5UIghaXAdK4riOiIMycNlNDslWToslyUK9qF7N_KJ-f1ina3FTCmmb_LBCv76o"/>
+                                <span class="font-medium text-white flex-grow">Carlos M. (C)</span>
+                                <span class="material-symbols-rounded text-white/50 text-[18px]">drag_indicator</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white/10 backdrop-blur-md rounded-xl border border-white/10 hover:border-white/30 transition-colors cursor-grab">
+                                <img alt="Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqjgv6pcW0huIQc2VHvslk4ZccQ_4evbr3mTNrSbOfFdT2bEri_7a4GK_71YK3YXXVdMuTCzYRcMmpBSoISPb98lnSHqWNLz5DHlj94Q6FYwEjgrs7-mCavc1RGxs5JaGu4Izy0UMnIshZNAltdDh2elysNPDwbk2QLEVG3q2PwjMcafHPedbzjL8DvOUJRLvQxaZAuSdwpm7N597wGp969FlmWPAlylMWl-_isqRmpGmQVMSZruOKcclGrEDWEIEL6MtoE9hdif0"/>
+                                <span class="font-medium text-white flex-grow">David S.</span>
+                                <span class="material-symbols-rounded text-white/50 text-[18px]">drag_indicator</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl border-2 border-dashed border-white/20 justify-center text-white/50 mt-2 hover:border-primary/50 hover:text-primary transition-colors cursor-pointer">
+                                <span class="material-symbols-rounded">add</span>
+                                <span class="font-bold text-sm">Lugar Disponible</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team B -->
+                    <div class="glass-card rounded-[2rem] p-8 flex flex-col border border-white reveal-on-scroll shadow-lg">
+                        <h3 class="text-xl font-bold text-ink mb-6 flex items-center gap-3">
+                            <span class="w-3 h-3 rounded-full bg-ink"></span> Equipo Voltaje
+                        </h3>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-borderLight shadow-sm hover:border-primary/50 transition-colors cursor-grab">
+                                <img alt="Avatar" class="w-10 h-10 rounded-full border border-ink" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0acQ2uuI1YypqUL8PEknXUtncdowEyTMVo9uVrE-GE7eQK3ZXUmVIhaBb2guOBQ9zGTJEbmVyCLMfz3SrUdrpc3LijoPf25g9xr4yejSTgz1wXnQWulFNmi4p5jnaIfZX5-dDb53gdfyWFK4JK-qF6cQy-dwe_N1Oq8ecUE5ywpsEk0WZ0GUmzqHyq8EXgyqUzZjFkXsJSnSJXKko9i2p4Y4Qs7pFav3Zd7FxWrz0nkICQwctDbAprI8ZSDPTY2Yd10VBhx1YFko"/>
+                                <span class="font-medium text-ink flex-grow">Sarah T. (C)</span>
+                                <span class="material-symbols-rounded text-textMuted text-[18px]">drag_indicator</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-borderLight shadow-sm hover:border-primary/50 transition-colors cursor-grab">
+                                <img alt="Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgJLaIvN26ujun-m0-snV3Z8Y1U9gZKeu78S2k6q11qo2dKSTgejBX4BT8q4u5sLUHAc8o8UaaEbvcqtL45RgLfazlojfS9AaVXnkK4kiEZme3cCVyiyjJXYU4XdAXbFeSGvpnevwSOnCkEYnp_4JplQXya2yQv6NPcuDjgBGS34aBtlIGOOzQoAWfuG5zT1yrp38u2xR176NUQmGU8TDvmQmREHpAMthGgs5x-E3PxIq-er7a9y8AkWTnI6rWZKeqt4ILv7P1mas"/>
+                                <span class="font-medium text-ink flex-grow">Mike R.</span>
+                                <span class="material-symbols-rounded text-textMuted text-[18px]">drag_indicator</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl border-2 border-dashed border-borderLight justify-center text-textMuted mt-2 hover:border-primary/50 hover:text-primary transition-colors cursor-pointer">
+                                <span class="material-symbols-rounded">add</span>
+                                <span class="font-bold text-sm">Lugar Disponible</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Estado & Acciones (Right Column) -->
+            <div class="col-span-1 lg:col-span-4 flex flex-col gap-6 mt-4">
+                <div class="glass-card rounded-[2rem] p-8 flex flex-col border-t-4 border-t-primary shadow-xl reveal-on-scroll">
+                    <h2 class="text-xl font-bold text-ink mb-4">Estado del Partido</h2>
+                    <div class="flex items-baseline gap-2 mb-8 border-b border-borderLight pb-6">
+                        <span class="text-5xl font-extrabold text-ink">5</span>
+                        <span class="text-sm font-bold text-textMuted">/ 10 Jugadores Confirmados</span>
+                    </div>
+                    
+                    <div class="flex flex-col gap-5 mb-8">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <img class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBqqo2I4dxurEOYezIjAsHXOzcToqBElYzjZ_O-U2kS7kwUPgxfv6aG2BnE2O7PjEsHG-iunjyPyH1ld9FvE2RJHBASivCmqMfxagplOnjQd2ZQJVVb2X0ExKC5N0enoN1f8LvMUmg-kHJgB3QospMt7wOlIlkkFpydbGA4r1a1vby_MwubQy5KaOl-y5E7hG-drFMZfPVo6ui2XoC7T_lWv5KZu9t_G6hLz9qHvX4T4BKTg0yOSWxCF4fwNgqaHsOh5BLRIW5nOg"/>
+                                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-primary border-2 border-white rounded-full shadow-sm"></div>
+                                </div>
+                                <span class="font-bold text-ink">Carlos M.</span>
+                            </div>
+                            <span class="font-bold text-sm text-primary uppercase">Adentro</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <img class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtaUr3rrMjdtKEoOPfNRJKR9V5HoJL-ferr8jWHEoh65uyr2zO4tfAChbD8ht8F-bu7xZ5euqHV4pClJjsPhR5s-F3gsoqrS23svIFU3ua39qSSYBJzu3fP81Bl--0kYrx0VDZlSxY0ORsATcIGsDMdvcM_6K5jBDM_wijfwDI01sabfbgWh5A0Y21y4QvDyeeuM0caEedjiNUG478lHNEzN-L6orIt6eUoTHkRz9m2JqqanfpMmaQL5P0-ZU1I-2wvgJzEwDT-Qw"/>
+                                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-primary border-2 border-white rounded-full shadow-sm"></div>
+                                </div>
+                                <span class="font-bold text-ink">Mike R.</span>
+                            </div>
+                            <span class="font-bold text-sm text-primary uppercase">Adentro</span>
+                        </div>
+                        <div class="flex items-center justify-between opacity-50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                                    <span class="material-symbols-rounded">person</span>
+                                </div>
+                                <span class="font-bold text-ink line-through">Elena G.</span>
+                            </div>
+                            <span class="font-bold text-sm text-red-500 uppercase">Afuera</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-ink text-white hover:bg-primary transition-all duration-300 font-bold text-sm px-6 py-4 rounded-full flex items-center justify-center gap-2 magnetic-btn shadow-lg mt-auto">
+                        <span class="material-symbols-rounded">sports_soccer</span> Confirmar para Jugar
+                    </button>
+                    <button class="w-full mt-4 border-2 border-borderLight text-ink hover:bg-gray-100 transition-colors font-bold text-sm px-6 py-3 rounded-full">
+                        Solo Mirar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-borderLight mt-10 bg-white/50 backdrop-blur-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full px-6 md:px-12 py-10 max-w-7xl mx-auto gap-6">
+            <div class="text-xl font-extrabold text-ink tracking-tight">SquadGoals</div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Privacidad</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Términos</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Soporte</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Guías</a>
+            </div>
+            <div class="text-sm font-medium text-textMuted">
+                © 2024 SquadGoals. Amistades Kinéticas.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

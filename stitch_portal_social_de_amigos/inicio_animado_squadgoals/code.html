@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SquadGoals - Inicio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00c853',
+                        primaryDark: '#009624',
+                        surface: '#ffffff',
+                        background: '#f8fafc',
+                        ink: '#0f172a',
+                        textMuted: '#64748b',
+                        cardBg: '#ffffff',
+                        borderLight: '#e2e8f0',
+                    },
+                    fontFamily: {
+                        sans: ["Outfit", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        
+        @keyframes letterReveal {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-letter {
+            animation: letterReveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="text-ink min-h-screen flex flex-col relative overflow-x-hidden">
+    
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-blue-300/20 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
+    </div>
+
+    <!-- Navegación -->
+    <header class="w-full z-50 sticky top-0 bg-white/70 backdrop-blur-xl border-b border-borderLight">
+        <div class="flex justify-between items-center w-full px-6 md:px-12 h-20 max-w-7xl mx-auto">
+            <div class="flex items-center gap-8">
+                <a class="text-2xl font-extrabold tracking-tight" href="#">SquadGoals</a>
+                <nav class="hidden md:flex gap-6 h-full items-center pt-2">
+                    <a class="text-sm font-bold text-primary border-b-2 border-primary pb-1" href="#">Inicio</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Fútbol 5</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Juntadas</a>
+                    <a class="text-sm font-semibold text-textMuted hover:text-ink transition-colors pb-1" href="#">Cumpleaños</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden md:flex items-center justify-center bg-ink text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-primary transition-all duration-300 shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5 magnetic-btn">
+                    Crear Evento
+                </button>
+                <div class="flex items-center gap-2">
+                    <button class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted hover:bg-gray-100 hover:text-ink transition-all">
+                        <span class="material-symbols-rounded text-[22px]">notifications</span>
+                    </button>
+                    <button class="w-10 h-10 rounded-full flex items-center justify-center text-textMuted hover:bg-gray-100 hover:text-ink transition-all">
+                        <span class="material-symbols-rounded text-[22px]">account_circle</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16">
+        
+        <!-- Hero Section -->
+        <section class="mb-16 md:mb-20">
+            <div class="bg-ink rounded-[2.5rem] overflow-hidden relative min-h-[420px] flex items-center shadow-2xl group">
+                <!-- Background Image -->
+                <div class="absolute inset-0 w-full h-full overflow-hidden">
+                    <img alt="Amigos celebrando" class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-[10s] ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASIwomr_bOiOlvfoJxtnQMlj6I2MPasBQNeAEgS6rTzHXZLZYKa53aA9NXnQnAhAmt1lJq93zp-5uyGU7XQ45tHTazRxxhKMKpvxuU7wiCN9WNCzRlCQDjNj8VNf2F-Oaoqxyx-6XJCQ5wuzCqJktezNayawQk7_DaZDoq5epbwvXt03srKZ8MxBV8qKQcAr0c_-JXjuHAC86LGYP1eMC_uIfWwXg1ZcUb17G4kkJ7E1xfXC6wk-T_bVnceLKvmc0zYfJMRqm2gbo"/>
+                    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent"></div>
+                </div>
+                
+                <div class="relative z-10 p-10 md:p-16 max-w-2xl text-white">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.1] tracking-tight">
+                        <span class="welcome-text opacity-0">Bienvenido de nuevo,</span><br/>
+                        <span class="text-primary drop-shadow-[0_0_15px_rgba(0,200,83,0.3)]">Los Guerreros del Finde</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-lg leading-relaxed font-light">
+                        ¡Tu equipo está activo! Tienes 3 eventos esta semana. No olvides confirmar tu asistencia para el partido del viernes.
+                    </p>
+                    <div class="inline-block animate-float">
+                        <button class="bg-primary text-ink font-bold text-sm md:text-base px-8 py-4 rounded-full hover:bg-white transition-all duration-300 shadow-[0_8px_20px_rgba(0,200,83,0.4)] hover:shadow-xl magnetic-btn">
+                            Ver Calendario Completo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+            
+            <!-- Fútbol 5 -->
+            <div class="col-span-1 lg:col-span-8 glass-card rounded-[2rem] p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group reveal-on-scroll border border-white">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500"></div>
+                
+                <div class="flex justify-between items-start mb-14 relative z-10">
+                    <div>
+                        <div class="inline-flex items-center gap-2 bg-primary/10 text-primaryDark font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-full mb-6">
+                            <span class="material-symbols-rounded text-[18px]">sports_soccer</span>
+                            Fútbol 5
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-ink leading-tight">El Clásico del Viernes<br/>por la Noche</h2>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-primary uppercase tracking-widest">Activo</span>
+                        <div class="w-3 h-3 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(0,200,83,0.6)]"></div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-8 justify-between items-end relative z-10">
+                    <div class="flex gap-4">
+                        <div class="bg-white/60 backdrop-blur-md rounded-2xl p-5 min-w-[110px] border border-white shadow-sm">
+                            <p class="text-xs font-bold text-textMuted uppercase tracking-widest mb-2">Fecha</p>
+                            <p class="text-xl font-bold text-ink">24 Oct</p>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-md rounded-2xl p-5 min-w-[110px] border border-white shadow-sm">
+                            <p class="text-xs font-bold text-textMuted uppercase tracking-widest mb-2">Hora</p>
+                            <p class="text-xl font-bold text-ink">19:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-6 w-full md:w-auto mt-6 md:mt-0">
+                        <div class="flex -space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-ink border-4 border-white flex items-center justify-center text-white font-bold text-sm shadow-md z-30">JD</div>
+                            <div class="w-12 h-12 rounded-full bg-gray-400 border-4 border-white flex items-center justify-center text-white font-bold text-sm shadow-md z-20">MK</div>
+                            <div class="w-12 h-12 rounded-full bg-primary border-4 border-white flex items-center justify-center text-ink font-bold text-sm shadow-md z-10">+8</div>
+                        </div>
+                        <button class="flex-grow md:flex-grow-0 bg-ink text-white font-bold px-8 py-4 rounded-full hover:bg-primary transition-all duration-300 shadow-lg transform hover:-translate-y-1 magnetic-btn">
+                            Confirmar Ahora
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Side Column -->
+            <div class="col-span-1 lg:col-span-4 flex flex-col gap-8">
+                
+                <!-- Upcoming Hangout -->
+                <div class="glass-card rounded-[2rem] p-8 flex-grow border-t-4 border-t-primary reveal-on-scroll relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-rounded text-[80px]">local_cafe</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2 bg-primary/10 text-primaryDark font-bold text-xs uppercase tracking-wider px-3 py-1.5 rounded-full mb-5">
+                        <span class="material-symbols-rounded text-[16px]">local_cafe</span>
+                        Juntadas
+                    </div>
+                    <h3 class="text-xl font-bold text-ink mb-3 leading-snug">Cervezas y Hamburguesas Post-Partido</h3>
+                    <p class="text-sm text-textMuted mb-8 font-medium leading-relaxed">Cervecería del Centro. ¡La primera ronda la paga el equipo perdedor!</p>
+                    <div class="flex items-center gap-2 text-ink font-bold mt-auto bg-white/50 w-fit px-4 py-2 rounded-xl">
+                        <span class="material-symbols-rounded text-[20px] text-primary">schedule</span>
+                        Viernes, 21:30
+                    </div>
+                </div>
+                
+                <!-- Next Birthday -->
+                <div class="bg-ink rounded-[2rem] p-8 text-white relative overflow-hidden reveal-on-scroll shadow-xl group">
+                    <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-rounded text-[120px]">cake</span>
+                    </div>
+                    <h3 class="text-sm font-bold text-white/50 uppercase tracking-widest mb-6 relative z-10">Próximo Cumpleaños</h3>
+                    
+                    <div class="flex items-center gap-5 relative z-10 mb-8">
+                        <div class="w-16 h-16 rounded-full border-2 border-primary p-1 bg-ink">
+                            <img alt="Sarah" class="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuIBcO3xrPiBt1gCZhF_CCqh1A36RUNQCkG7fsxmrAsveMqXSXhPTfUHozGuKEAfHo4ojk5SyRSiIbnSGUwvFkc1pz9l5lmfGbyyNiM00DaH8DtalIGrbWNjjorlQMu_eJZzY8m8MMNlcMhWUfNeuM5hblpgSr6OiRVYox7bGadeWaWhyeCDxxoT1vdMRJj-uqeetf5gr8u3kTOnfeGHs71ef_zXW45hXoAudOP73vG7BjrUN9GVzqKdRp8Qavnst6f7wvDQKAQ6c"/>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold">Sarah Jenkins</p>
+                            <p class="text-sm font-medium text-primary mt-1">¡Cumple 28 mañana!</p>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-white/10 hover:bg-primary border border-white/20 hover:border-primary text-white hover:text-ink font-bold py-3.5 rounded-xl transition-all duration-300 relative z-10 magnetic-btn backdrop-blur-sm">
+                        Enviar un Regalo
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-borderLight mt-10 bg-white/50 backdrop-blur-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full px-6 md:px-12 py-10 max-w-7xl mx-auto gap-6">
+            <div class="text-xl font-extrabold text-ink tracking-tight">SquadGoals</div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Privacidad</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Términos</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Soporte</a>
+                <a class="text-sm font-bold text-textMuted hover:text-primary transition-colors" href="#">Guías</a>
+            </div>
+            <div class="text-sm font-medium text-textMuted">
+                © 2024 SquadGoals. Amistades Kinéticas.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Scroll Reveal
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+            // Magnetic Hover Effect
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = '';
+                });
+            });
+
+            // Staggered Text Reveal
+            const welcomeTextEl = document.querySelector('.welcome-text');
+            if (welcomeTextEl) {
+                const text = welcomeTextEl.textContent;
+                welcomeTextEl.textContent = '';
+                welcomeTextEl.classList.remove('opacity-0');
+                
+                text.split('').forEach((char, i) => {
+                    const span = document.createElement('span');
+                    span.textContent = char === ' ' ? '\u00A0' : char;
+                    span.style.animationDelay = `${i * 0.03}s`;
+                    span.className = 'animate-letter opacity-0';
+                    welcomeTextEl.appendChild(span);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

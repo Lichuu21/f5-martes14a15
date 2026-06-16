@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Birthdays - SquadGoals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#bbcbb8",
+                    "on-tertiary-container": "#3f4142",
+                    "on-surface-variant": "#3c4a3c",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f5f3f3",
+                    "on-primary-container": "#004c1b",
+                    "surface-container-high": "#e9e8e7",
+                    "tertiary": "#5d5f5f",
+                    "surface-container": "#efeded",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-container": "#00c853",
+                    "surface-tint": "#006e2a",
+                    "outline": "#6c7b6a",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-bright": "#fbf9f8",
+                    "inverse-surface": "#303031",
+                    "secondary-fixed": "#e5e2e1",
+                    "secondary-container": "#e5e2e1",
+                    "surface-variant": "#e4e2e2",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-fixed": "#002108",
+                    "background": "#fbf9f8",
+                    "on-primary-fixed-variant": "#00531e",
+                    "inverse-primary": "#3ce36a",
+                    "on-surface": "#1b1c1c",
+                    "on-background": "#1b1c1c",
+                    "surface-container-highest": "#e4e2e2",
+                    "surface-dim": "#dbdad9",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#acadad",
+                    "primary-fixed-dim": "#3ce36a",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface": "#fbf9f8",
+                    "secondary-fixed-dim": "#c9c6c5",
+                    "secondary": "#5f5e5e",
+                    "on-secondary-container": "#656464",
+                    "primary": "#006e2a",
+                    "primary-fixed": "#69ff87",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "unit": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "title-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg-mobile": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "display-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-bold": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "title-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "label-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-outline-variant sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<div class="font-display-lg text-headline-lg-mobile md:text-display-lg font-extrabold text-on-surface dark:text-inverse-on-surface tracking-tighter">
+                SquadGoals
+            </div>
+<!-- Navigation Links (Hidden on Mobile, Flex on MD+) -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="font-label-bold text-label-bold text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors h-full flex items-center px-2 hover:bg-surface-container dark:hover:bg-on-surface-variant" href="#">Home</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors h-full flex items-center px-2 hover:bg-surface-container dark:hover:bg-on-surface-variant" href="#">Soccer 5</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant dark:text-tertiary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors h-full flex items-center px-2 hover:bg-surface-container dark:hover:bg-on-surface-variant" href="#">Hangouts</a>
+<!-- Active State -->
+<a class="font-label-bold text-label-bold text-primary dark:text-primary-fixed border-b-4 border-primary dark:border-primary-fixed pb-2 h-full flex items-center px-2 hover:bg-surface-container dark:hover:bg-on-surface-variant transition-all hover:scale-95 duration-100 ease-in-out" href="#">Birthdays</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center justify-center font-label-bold text-label-bold bg-[#0A0A0A] text-white px-6 py-3 rounded-lg hover:bg-primary transition-colors">
+                    Create Event
+                </button>
+<div class="flex items-center gap-3">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-container p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-16">
+<!-- Page Header -->
+<div class="mb-12 text-center md:text-left">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg mb-4">Upcoming Birthdays 🎂</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Don't forget to celebrate your squad.</p>
+</div>
+<!-- Highlighted Next Birthday Bento Section -->
+<section class="mb-16">
+<h2 class="font-title-md text-title-md mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">celebration</span> Next Up</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Large Highlight Card -->
+<div class="lg:col-span-2 bg-[#0A0A0A] text-white rounded-[24px] p-8 md:p-12 relative overflow-hidden flex flex-col justify-between min-h-[400px]">
+<!-- Decorative Gradient -->
+<div class="absolute top-0 right-0 w-[300px] h-[300px] bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-40 translate-x-1/3 -translate-y-1/3"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-bold text-label-bold inline-flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">today</span> Today
+                        </div>
+<div class="font-title-md text-title-md text-primary-fixed">Turns 28</div>
+</div>
+<div class="relative z-10 mt-auto flex flex-col md:flex-row items-end md:items-center justify-between gap-8">
+<div class="flex items-center gap-6 w-full md:w-auto">
+<!-- Avatar with Electric Green Ring -->
+<div class="w-24 h-24 rounded-full border-4 border-primary-fixed p-1 flex-shrink-0">
+<img alt="Alex's Avatar" class="w-full h-full rounded-full object-cover" data-alt="A close-up portrait of a cheerful young woman with curly hair, smiling brightly in an urban setting. The lighting is natural and high-key, enhancing the vibrant, modern energy of the shot. The aesthetic aligns with a high-contrast, premium lifestyle brand, using deep shadows and bright highlights to create depth. The mood is joyful and energetic, perfect for a celebration context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdtjn9eB8IlbK36GoTq4QkNU1PXg9jCdv8kUBlu5kVcNav7Ed5SUpzXDbsdbT8t9l71o2mOnna8gCPC-57juSNnrTh1SYISOzSbp8DZZkJ8NyIZSrtXYIK72uxopavf87wUCcoGfnY6uzBkHPIIXRRN6tLKdRW9rKy4Nb5uskBVUFUBM42wlSIgXWPx43LvTQkK2cFD58MyyqPAyJGRcVAHAmTWz_jzRom7jt_ZMJ6n1H55QKFb6xiF986wwnu59JUqGD5BxeJ-CU"/>
+</div>
+<div>
+<h3 class="font-display-lg text-headline-lg-mobile md:text-headline-lg mb-2 text-white">Alex Rivera</h3>
+<p class="font-body-md text-body-md text-surface-variant opacity-80">October 24</p>
+</div>
+</div>
+<button class="w-full md:w-auto bg-primary-fixed text-[#0A0A0A] font-label-bold text-label-bold px-8 py-4 rounded-xl hover:bg-white transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">send</span> Send Wishes
+                        </button>
+</div>
+</div>
+<!-- Secondary Highlight / Quick Action -->
+<div class="bg-surface-container-low rounded-[24px] p-8 border-2 border-outline-variant flex flex-col justify-center items-center text-center">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-[32px]">event</span>
+</div>
+<h3 class="font-title-md text-title-md mb-4">Plan a Surprise</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Start organizing a dinner or a hangout for Alex.</p>
+<button class="border-2 border-[#0A0A0A] text-[#0A0A0A] font-label-bold text-label-bold px-6 py-3 rounded-lg hover:bg-[#0A0A0A] hover:text-white transition-colors w-full">
+                        Create Event
+                    </button>
+</div>
+</div>
+</section>
+<!-- Chronological List -->
+<section>
+<h2 class="font-title-md text-title-md mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-on-surface-variant">calendar_month</span> Coming Up</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- List Item 1 -->
+<div class="bg-[#F4F4F4] p-6 rounded-[16px] flex items-center gap-6 hover:bg-surface-container transition-colors group">
+<div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+<img alt="David's Avatar" class="w-full h-full object-cover" data-alt="A portrait of a young man with a slight smile, standing against an out-of-focus background. The lighting is soft and natural, creating a clean, approachable look. The color palette features neutral tones with sharp contrast, aligning with a modern, high-end web aesthetic. The overall mood is relaxed and friendly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcSN83OaboBSpYs1zWiya06Hw4b5W6EaV5j0zPBspEZFp2iWQL8-_xidp23xQcE0p6l6FtQcFYOvJpICXqjzQiQdt_5Bkqjh6h2cyxwQ5ilVzIn1K4M-PLz5Pzajjn8i9G_Bl8Q2zrw_3zn7qIxD4WXlYSXJXmrYyvHjMH6GYcWNsOsE-O8BiU9UPnxtJxKfHcFOdUHSnzGkUlkuHT89KQO8fYY1eJQ4CbWzvzymUBVs1waMfBd8a9CseBMyFTR37uA1YP0eA62Uo"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-title-md text-title-md mb-1">David Kim</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">November 12</p>
+</div>
+<div class="text-right">
+<div class="font-label-bold text-label-bold text-on-surface-variant bg-surface-dim px-3 py-1 rounded-full mb-1 inline-block">In 19 days</div>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="bg-[#F4F4F4] p-6 rounded-[16px] flex items-center gap-6 hover:bg-surface-container transition-colors group">
+<div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+<img alt="Sarah's Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a woman looking directly at the camera with a gentle expression. The shot is lit with soft, flattering light against a minimalist background. The high-contrast black and white styling with subtle warmth gives it a premium, professional feel. The mood is calm and inviting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuColgzjY_-joxMd_1nepEUwBjBorEOckEhAY3tbBAMf99qVtqStDMN_2DMdOOleMXZPik6V4voRLrI-IwcDV9J9N7fyROyNGy0aMvqtgzF2x2DILkPtE1QjZQBiGJGHtKkR5WnVLU_3r-ajK2ko65yg2RmqeK7hMR-dg2r-cIP9ESjEBmTr1R6HiCfuC7NXRVmxWp8ncYrWxh9TrTLyOEifWgjDK9JOg7psDVAmqde5L6AxpBo93SLdRqn4C16Y3Gd6KYPSXoBqCUc"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-title-md text-title-md mb-1">Sarah Jenkins</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">December 5</p>
+</div>
+<div class="text-right">
+<div class="font-label-bold text-label-bold text-on-surface-variant bg-surface-dim px-3 py-1 rounded-full mb-1 inline-block">In 42 days</div>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="bg-[#F4F4F4] p-6 rounded-[16px] flex items-center gap-6 hover:bg-surface-container transition-colors group">
+<div class="w-16 h-16 rounded-full bg-surface-dim flex items-center justify-center flex-shrink-0 text-title-md font-title-md text-on-surface-variant">
+                        MR
+                    </div>
+<div class="flex-grow">
+<h4 class="font-title-md text-title-md mb-1">Marcus Reed</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">January 15</p>
+</div>
+</div>
+<!-- List Item 4 -->
+<div class="bg-[#F4F4F4] p-6 rounded-[16px] flex items-center gap-6 hover:bg-surface-container transition-colors group">
+<div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+<img alt="Omar's Avatar" class="w-full h-full object-cover" data-alt="A portrait of a man wearing a casual shirt, smiling warmly outdoors. The scene is bright and airy, utilizing high-key lighting to enhance a modern, clean aesthetic. The visual style features sharp focus on the subject with a softly blurred background, typical of premium lifestyle imagery. The mood is casual, friendly, and energetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGn7iSJPsLv41_ZO7Iox1ZzDOigd65CErTi7TtWaFNDsEqzFO3AGrWRclbbCW9Nsnh7qpnTNRvP-4F72hhFcbNQosWrXph1w6n2zWHJlT1svD8i-cnqkxcnzbLPx0Zhcm9K-dJLg_hmUJ6SNffNFux1Hnk418eAuUUUB-xK1MXCb_lGaxgPnYkKZXR9Or030L2aagEpCtaXo19_wfn8h5GUk2jfKXpJ7nji3x2Az0tEkOG_4WM2Ov9rgw9snQqOjbSSJ1MCGSQeCM"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-title-md text-title-md mb-1">Omar Tariq</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">February 2</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-on-surface dark:bg-surface-container-lowest text-primary-fixed dark:text-primary py-12 w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto border-t border-on-surface dark:border-surface-dim pt-8">
+<div class="font-title-md text-title-md mb-6 md:mb-0">
+                SquadGoals
+            </div>
+<div class="flex gap-6 mb-6 md:mb-0">
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed dark:hover:text-primary transition-opacity duration-200" href="#">Privacy</a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed dark:hover:text-primary transition-opacity duration-200" href="#">Terms</a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed dark:hover:text-primary transition-opacity duration-200" href="#">Support</a>
+<a class="font-label-bold text-label-bold text-surface-variant opacity-80 hover:opacity-100 hover:text-primary-fixed dark:hover:text-primary transition-opacity duration-200" href="#">Guidelines</a>
+</div>
+<div class="font-body-md text-body-md text-surface-variant opacity-80 text-center md:text-right">
+                © 2024 SquadGoals Social. Kinetic Friendships.
+            </div>
+</div>
+</footer>
+</body></html>
