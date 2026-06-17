@@ -4303,10 +4303,10 @@
 
                     // Guardar público en la tabla birthdays para que todos lo vean en el Plantel
                     if (AppState.currentUser) {
-                        const publicName = '[MEMBER] ' + AppState.currentUser;
+                        const publicName = '[MEMBER] ' + AppState.currentUser + '%';
                         const { error: dbError } = await supabase.from('birthdays')
                             .update({ jersey_number: number })
-                            .eq('name', publicName);
+                            .ilike('name', publicName);
                         if (dbError) console.warn('No se pudo actualizar el número público:', dbError.message);
                     }
                 }
