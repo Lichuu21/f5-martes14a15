@@ -3448,26 +3448,29 @@
                 html += '</div>'; // End col-span-4
 
                 // 4. App Members (El Plantel)
-                let memberNames = [];
+                let membersData = [];
                 if (AppState.birthdays) {
-                    memberNames = AppState.birthdays
+                    membersData = AppState.birthdays
                         .filter(b => b.name.startsWith('[MEMBER]'))
-                        .map(b => b.name.replace('[MEMBER] ', ''));
+                        .map(b => ({
+                            name: b.name.replace('[MEMBER] ', ''),
+                            jerseyNum: b.jersey_number || null
+                        }));
                 }
 
                 // Add current logged in user if not present
-                if (AppState.currentUser && !memberNames.includes(AppState.currentUser)) {
-                    memberNames.push(AppState.currentUser);
+                if (AppState.currentUser && !membersData.some(m => m.name === AppState.currentUser)) {
+                    membersData.push({ name: AppState.currentUser, jerseyNum: AppState.userJerseyNumber || null });
                 }
 
-                if (memberNames.length > 0) {
-                    const membersHtml = memberNames.map((name, index) => {
-                        // Buscar jersey number del miembro (por nombre en Supabase metadata o en AppState)
-                        const memberJersey = AppState.memberJerseys && AppState.memberJerseys[name];
+                if (membersData.length > 0) {
+                    const membersHtml = membersData.map((member, index) => {
+                        const name = member.name;
                         const isCurrentUser = name === AppState.currentUser;
+                        // Priorizar el número en caché si es el usuario actual, sino usar el de la base pública
                         const jerseyNum = isCurrentUser && AppState.userJerseyNumber
                             ? AppState.userJerseyNumber
-                            : (memberJersey || null);
+                            : member.jerseyNum;
 
                         return `
                     <div class="bg-white border border-slate-100 rounded-[2rem] p-6 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 relative group overflow-hidden cursor-pointer hover:-translate-y-1">
@@ -3493,7 +3496,7 @@
                             <p class="text-sm text-textMuted mt-1">Los miembros registrados de F5 Martes  14 a 15.</p>
                         </div>
                         <span class="bg-primary/10 text-primaryDark font-extrabold px-4 py-1.5 rounded-full text-xs uppercase">
-                            ${memberNames.length} Miembros
+                            ${membersData.length} Miembros
                         </span>
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
@@ -4290,12 +4293,22 @@
                 // Guardar en localStorage como fallback
                 localStorage.setItem('userJerseyNumber', number);
 
-                // Si hay Supabase, guardar en user_metadata
+                // Si hay Supabase, guardar en user_metadata y en la tabla pública de plantel
                 if (supabase) {
+                    // Guardar privado
                     const { error } = await supabase.auth.updateUser({
                         data: { jersey_number: number }
                     });
-                    if (error) console.warn('No se pudo guardar en Supabase:', error.message);
+                    if (error) console.warn('No se pudo guardar en Supabase metadata:', error.message);
+
+                    // Guardar público en la tabla birthdays para que todos lo vean en el Plantel
+                    if (AppState.currentUser) {
+                        const publicName = '[MEMBER] ' + AppState.currentUser;
+                        const { error: dbError } = await supabase.from('birthdays')
+                            .update({ jersey_number: number })
+                            .eq('name', publicName);
+                        if (dbError) console.warn('No se pudo actualizar el número público:', dbError.message);
+                    }
                 }
 
                 btn.innerHTML = '<span class="material-symbols-rounded text-[18px]">check_circle</span> ¡Guardado!';
